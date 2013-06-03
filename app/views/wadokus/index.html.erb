@@ -1,0 +1,25 @@
+<h1>Listing wadokus</h1>
+
+<table>
+  <tr>
+    <th>Entry</th>
+    <th>Contents</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @wadokus.each do |wadoku| %>
+  <tr>
+    <td><%= wadoku.entry %></td>
+    <td><%= wadoku.contents %></td>
+    <td><%= link_to 'Show', wadoku %></td>
+    <td><%= link_to 'Edit', edit_wadoku_path(wadoku) %></td>
+    <td><%= link_to 'Destroy', wadoku, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Wadoku', new_wadoku_path %>

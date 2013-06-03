@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Kimura page:</b>
+  <%= @kimura.kimura_page %>
+</p>
+
+<p>
+  <b>Kimura column:</b>
+  <%= @kimura.kimura_column %>
+</p>
+
+<p>
+  <b>Kimura lemma:</b>
+  <%= @kimura.kimura_lemma %>
+</p>
+
+<p>
+  <b>Kimura reading:</b>
+  <%= @kimura.kimura_reading %>
+</p>
+
+<p>
+  <b>Kimura wadoku candidates:</b>
+  <%= @kimura.kimura_wadoku_candidates %>
+</p>
+
+<p>
+  <b>Kimura isedited:</b>
+  <%= @kimura.kimura_isEdited %>
+</p>
+
+<p>
+  <b>Kimura hascandidates:</b>
+  <%= @kimura.kimura_hasCandidates %>
+</p>
+
+
+<%= link_to 'Edit', edit_kimura_path(@kimura) %> |
+<%= link_to 'Back', kimuras_path %>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Baseviewer</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+       <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+
+<%= yield %>
+
+<% if user_signed_in? %>
+  Logged in as <strong><%= current_user.email %></strong>.
+  <%= link_to 'Account verwalten', edit_user_registration_path %> |
+  <%= link_to "Sitzung beenden", destroy_user_session_path, :method => :delete %>
+<% else %>
+  <%= link_to "Neues Account anlegen", new_user_registration_path %> |
+  <%= link_to "Einloggen", new_user_session_path  %>
+<% end %>
+
+</body>
+</html>

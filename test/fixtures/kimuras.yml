@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  kimura_page: 1
+  kimura_column: MyString
+  kimura_lemma: 1
+  kimura_reading: MyString
+  kimura_wadoku_candidates: MyString
+  kimura_isEdited: false
+  kimura_hasCandidates: false
+
+two:
+  kimura_page: 1
+  kimura_column: MyString
+  kimura_lemma: 1
+  kimura_reading: MyString
+  kimura_wadoku_candidates: MyString
+  kimura_isEdited: false
+  kimura_hasCandidates: false

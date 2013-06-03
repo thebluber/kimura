@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Entry:</b>
+  <%= @wadoku.entry %>
+</p>
+
+<p>
+  <b>Contents:</b>
+  <%= @wadoku.contents %>
+</p>
+
+
+<%= link_to 'Edit', edit_wadoku_path(@wadoku) %> |
+<%= link_to 'Back', wadokus_path %>

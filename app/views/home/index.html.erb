@@ -1,0 +1,8 @@
+
+<% if user_signed_in? then %>
+<h1>Hallo, <%= current_user.email %>!</h1>
+<p><%= link_to "Zur Liste der Einträge aus Kimura", kimuras_path %></p>
+<% else %>
+<h1>Hallo, Sie sind jetzt nicht (mehr) eingeloggt!</h1>
+<% end %>
+

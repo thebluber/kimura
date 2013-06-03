@@ -1,0 +1,43 @@
+<%= form_for(@kimura) do |f| %>
+  <% if @kimura.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@kimura.errors.count, "error") %> prohibited this kimura from being saved:</h2>
+
+      <ul>
+      <% @kimura.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<p> Seite: <%= "#{@kimura.kimura_page}" %> Spalte: <%= "#{@kimura.kimura_column}" %>
+    Lemma: <%= "#{@kimura.kimura_lemma}" %> </p>
+
+<% if @kimura.kimura_isEdited %>
+<p> Dieser Eintrag wurde bereits bearbeitet</p>
+<% else %>
+<p> Dieser Eintrag wurde noch nicht bearbeitet</p>
+<% end %>
+
+  <div class="field">
+    <%= f.label "Lesung: " %><br />
+    <%= f.text_field :kimura_reading %>
+  </div>
+
+<% @newar.each do |unit| %>
+ <p> <strong><%= "#{unit.entry}"%> </strong> <br> <%="#{unit.contents}" %> </p>
+  <% end %>
+
+<p>Wählen Sie bitte die passende ID aus der obigen Liste aus: <%= select_tag "dropdown_cases[]", options_for_select(@myVar) %> </p>
+<p></p>
+  
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>
+
+
+
