@@ -26,6 +26,7 @@ default_run_options[:pty] = true
 set :deploy_via, :remote_cache
 set :user, "deploy"
 set :use_sudo, false
+set :stages, %w{staging, production}
 
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
