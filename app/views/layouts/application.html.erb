@@ -7,20 +7,31 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="container">
+    <div class="row">
+      <% if notice %>
+        <p class="notice"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert"><%= notice %></p>
+      <% end %>
 
-       <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
 
-<%= yield %>
 
-<% if user_signed_in? %>
-  Logged in as <strong><%= current_user.email %></strong>.
-  <%= link_to 'Account verwalten', edit_user_registration_path %> |
-  <%= link_to "Sitzung beenden", destroy_user_session_path, :method => :delete %>
-<% else %>
-  <%= link_to "Neues Account anlegen", new_user_registration_path %> |
-  <%= link_to "Einloggen", new_user_session_path  %>
-<% end %>
+      <div class="span12">
+      <%= yield %>
+      </div>
+
+      <% if user_signed_in? %>
+        Logged in as <strong><%= current_user.email %></strong>.
+        <%= link_to 'Account verwalten', edit_user_registration_path %> |
+        <%= link_to "Sitzung beenden", destroy_user_session_path, :method => :delete %>
+      <% else %>
+        <%= link_to "Neues Account anlegen", new_user_registration_path %> |
+        <%= link_to "Einloggen", new_user_session_path  %>
+      <% end %>
+    </div>
+  </div>
 
 </body>
 </html>
