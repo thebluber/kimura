@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130604125516) do
+ActiveRecord::Schema.define(:version => 20130604131257) do
 
   create_table "kimuras", :force => true do |t|
     t.integer  "kimura_page"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20130604125516) do
     t.datetime "updated_at",               :null => false
     t.integer  "user_id"
     t.integer  "wadoku_id"
+    t.string   "kimura_writing"
   end
 
   create_table "links", :force => true do |t|
