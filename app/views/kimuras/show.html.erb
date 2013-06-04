@@ -25,15 +25,12 @@
   <%= @kimura.kimura_wadoku_candidates %>
 </p>
 
+<% if @kimura.wadoku %>
 <p>
-  <b>Kimura isedited:</b>
-  <%= @kimura.kimura_isEdited %>
+  <b>Kimura parsed wadoku:</b>
+  <%= @kimura.wadoku.entry %>
 </p>
-
-<p>
-  <b>Kimura hascandidates:</b>
-  <%= @kimura.kimura_hasCandidates %>
-</p>
+<% end %>
 
 
 <%= link_to 'Edit', edit_kimura_path(@kimura) %> |

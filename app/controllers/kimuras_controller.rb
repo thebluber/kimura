@@ -2,19 +2,19 @@ class KimurasController < ApplicationController
   # GET /kimuras
   # GET /kimuras.json
 
-def index
+  def index
     if user_signed_in? then
-    @kimuras = Kimura.order("kimura_page").page(params[:page])
+      @kimuras = Kimura.order("kimura_page").page(params[:page])
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @kimuras }
-#      format.xml  { render :xml => @kimuras }
-    end
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render :json => @kimuras }
+        #      format.xml  { render :xml => @kimuras }
+      end
 
-     else
+    else
       render "notAuthorized"
-     end
+    end
 
   end
 
@@ -54,11 +54,14 @@ end
   # GET /kimuras/1/edit
   def edit
     @kimura = Kimura.find(params[:id])  
-    @myVar = @kimura.kimura_wadoku_candidates.split(" ")
-#    @wadoku = Wadoku.where(:entry => "#{@myVar.last}")
-    @newar = Wadoku.where(:entry => @myVar)
-#    @wadoku = Wadoku.where("entry = ?",  params[@myVar.first])
-
+    @kimura.wadoku && @kimura.wadoku.entry == "new" ? @new_wadoku_content = @kimura.wadoku.contents : @new_wadoku_content = ""
+    @kimura.wadoku ? @wadoku_entry = @kimura.wadoku.entry : @wadoku_entry = ""
+    @myVar = @kimura.kimura_wadoku_candidates.split(", ") #candidates
+    @myVar.last.gsub!(",", "")
+    @newar = []
+    @myVar.each do |cand|
+      @newar += Wadoku.where(:entry => cand)
+    end
   end
 
   # POST /kimuras
@@ -89,22 +92,34 @@ end
 
     if user_signed_in? then
     @kimura = Kimura.find(params[:id])
-    @link = Link.new
-#    @usver = current_user
-    @myVar = @kimura.kimura_wadoku_candidates.split(" ")
-    @newar = Wadoku.where(:entry => @myVar)
+    #@link = Link.new
+#   @usver = current_user
+    #@myVar = @kimura.kimura_wadoku_candidates.split(" ")
+    #@newar = Wadoku.where(:entry => @myVar)
+    new_wadoku_contents = params[:kimura].delete("wadoku")
+    if params[:dropdown_cases][0] != "new"
+      @kimura.wadoku = Wadoku.where(:entry => params[:dropdown_cases][0]).first
+    else
+      new_wadoku = Wadoku.new
+      new_wadoku.entry = "new"
+      new_wadoku.contents =  new_wadoku_contents
+      new_wadoku.save
+      @kimura.wadoku = new_wadoku
+    end
+    @kimura.update_attributes(params[:kimura])
 
     respond_to do |format|
-      if @kimura.update_attributes(params[:kimura])
-    
-	params["dropdown_cases"].each do |cases|
- 	@dropdown_value = cases.to_i
- 	@link.update_attributes(:kimura => "#{@kimura.id}")
- 	@link.update_attributes(:wadoku => "#{@dropdown_value}")
-#	@link.update_attributes(:wadoku => @myVar[@dropdown_value - 1])
-	@link.update_attributes(:student => "#{@current_user.id}")
-		end
-        @kimura.update_attributes(:kimura_isEdited => true)
+      if @kimura.save
+      #if @kimura.update_attributes(params[:kimura])
+
+        #params["dropdown_cases"].each do |cases|
+          #@dropdown_value = cases.to_i
+          #@link.update_attributes(:kimura => "#{@kimura.id}")
+          #@link.update_attributes(:wadoku => "#{@dropdown_value}")
+          #	@link.update_attributes(:wadoku => @myVar[@dropdown_value - 1])
+          #@link.update_attributes(:student => "#{@current_user.id}")
+          
+        #end
         format.html { redirect_to @kimura, :notice => 'Ihre Eingabe wurde erfolgreich bearbeitet!.' }
         format.json { head :no_content }
       else
