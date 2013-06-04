@@ -26,10 +26,10 @@
 </p>
 
 <% if @kimura.wadoku %>
-<p>
-  <b>Kimura parsed wadoku:</b>
-  <%= @kimura.wadoku.entry %>
-</p>
+  <p>
+    <b>Kimura parsed wadoku:</b>
+    <%= link_to @kimura.wadoku.entry, wadoku_path(@kimura.wadoku) %>
+  </p>
 <% end %>
 
 

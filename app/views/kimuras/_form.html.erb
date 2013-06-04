@@ -11,8 +11,10 @@
     </div>
   <% end %>
 
-  <p> Seite: <%= "#{@kimura.kimura_page}" %> Spalte: <%= "#{@kimura.kimura_column}" %>
-  Lemma: <%= "#{@kimura.kimura_lemma}" %> </p>
+  <p>
+    Seite: <%= "#{@kimura.kimura_page}" %> Spalte: <%= "#{@kimura.kimura_column}" %>
+    Lemma: <%= "#{@kimura.kimura_lemma}" %>
+  </p>
 
   <% if @kimura.kimura_isEdited %>
     <p> Dieser Eintrag wurde bereits bearbeitet</p>
@@ -29,23 +31,18 @@
     <%= f.text_field :kimura_writing %>
   </div>
 
-  <% @newar.each do |unit| %>
-    <p> <span style="color:green"><strong><%= "#{unit.entry}"%> </strong></span style> <br> <%="#{unit.contents}" %> </p>
-    <% end %>
-  <div class="field">
-    <%= f.label "Neuer Wadoku Eintrag: " %><br />
-    <%= f.text_area :wadoku, :value => @new_wadoku_content %>
-  </div>
-    <% @myVar.push("new") %>
-    <p>Wählen Sie bitte die passende ID aus der obigen Liste aus: <%= select_tag "dropdown_cases[]", options_for_select(@myVar, @wadoku_entry) %> </p>
-    <p></p>
-
-
-    <div class="actions">
-      <%= f.submit %>
-    </div>
-
+  <% @entries.each do |wadoku_entry| %>
+    <p>
+      <span style="color:green"><strong><%= "#{wadoku_entry.entry}"%> </strong></span>
+      <br>
+      <%="#{wadoku_entry.contents}" %>
+    </p>
   <% end %>
 
+  <p>Wählen Sie bitte die passende ID aus der obigen Liste aus: <%= select_tag "wadoku_id", options_for_select(@ids + ['new'], @selected_id) %> </p>
 
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 
+<% end %>
