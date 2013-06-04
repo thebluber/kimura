@@ -8,6 +8,8 @@ gem 'kaminari'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :development do
+  gem 'pry'
+  gem 'binding_of_caller'
   gem 'sqlite3'
 end
 
