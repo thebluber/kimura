@@ -13,3 +13,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+*~
+wadoku_error
+kimura_error
