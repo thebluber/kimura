@@ -4,40 +4,63 @@
       <h2><%= pluralize(@kimura.errors.count, "error") %> prohibited this kimura from being saved:</h2>
 
       <ul>
-      <% @kimura.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @kimura.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-<p> Seite: <%= "#{@kimura.kimura_page}" %> Spalte: <%= "#{@kimura.kimura_column}" %>
-    Lemma: <%= "#{@kimura.kimura_lemma}" %> </p>
+  <p>
+    Seite: <%= "#{@kimura.kimura_page}" %> Spalte: <%= "#{@kimura.kimura_column}" %>
+    Lemma: <%= "#{@kimura.kimura_lemma}" %>
+  </p>
 
-<% if @kimura.kimura_isEdited %>
-<p> Dieser Eintrag wurde bereits bearbeitet</p>
-<% else %>
-<p> Dieser Eintrag wurde noch nicht bearbeitet</p>
-<% end %>
+  <% if @kimura.kimura_isEdited %>
+    <p> Dieser Eintrag wurde bereits bearbeitet</p>
+  <% else %>
+    <p> Dieser Eintrag wurde noch nicht bearbeitet</p>
+  <% end %>
 
   <div class="field">
     <%= f.label "Lesung: " %><br />
     <%= f.text_field :kimura_reading %>
   </div>
+  <div class="field">
+    <%= f.label "Schreibung: " %><br />
+    <%= f.text_field :kimura_writing %>
+  </div>
 
-<% @newar.each do |unit| %>
- <p> <strong><%= "#{unit.entry}"%> </strong> <br> <%="#{unit.contents}" %> </p>
-  <% end %>
 
-<p>Wählen Sie bitte die passende ID aus der obigen Liste aus: <%= select_tag "dropdown_cases[]", options_for_select(@myVar) %> </p>
-<p></p>
-  
+  <% @entries.each do |wadoku_entry| %>
+
+<% if wadoku_entry.entry != "0000000" %>
+    <p>
+      <span style="color:green"><strong><%= "#{wadoku_entry.entry}"%> </strong></span>
+      <br>
+      <%="#{wadoku_entry.contents}" %>
+    </p>
+<% else %>
+    <p>
+      <span style="color:blue"><strong><%= "#{wadoku_entry.id}"%> </strong> and written as: 
+      <%= "#{wadoku_entry.writing}"%> </span>      
+    </p>
+<% end %>
+
+<% end %>
+
+
+<% unless @ids.nil? %>
+  <p>Wählen Sie bitte die passende ID aus der obigen Liste aus: <%= select_tag "wadoku_entry", options_for_select(@ids + ['new'], @selected_id) %> </p>
+
+	<% else %>
+
+  <p>Wählen Sie bitte die passende ID aus der obigen Liste aus: <%= select_tag "wadoku_id", options_for_select(@variousIds + ['new'], @selected_id) %> </p>
+<% end %>
+
 
   <div class="actions">
     <%= f.submit %>
   </div>
 
 <% end %>
-
-
-

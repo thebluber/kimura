@@ -25,7 +25,7 @@ class WadokusController < ApplicationController
   # GET /wadokus/new.json
   def new
     @wadoku = Wadoku.new
-    @wadoku.update_attributes(:entry => "0000000")
+    @wadoku.update_attributes(:entry => "#{@wadoku.id}")
     @wadoku.update_attributes(:contents => "")
 
     respond_to do |format|
@@ -47,7 +47,7 @@ class WadokusController < ApplicationController
     respond_to do |format|
       if @wadoku.save
                  if @wadoku.entry.nil?
-                      @wadoku.update_attributes(:entry => "0000000")
+                      @wadoku.update_attributes(:entry => "#{@wadoku.id}")
 		      @wadoku.update_attributes(:contents => "")
 		 end
         format.html { redirect_to @wadoku, :notice => 'Wadoku was successfully created.' }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130604131257) do
+ActiveRecord::Schema.define(:version => 20130605051111) do
 
   create_table "kimuras", :force => true do |t|
     t.integer  "kimura_page"
@@ -57,8 +57,11 @@ ActiveRecord::Schema.define(:version => 20130604131257) do
   create_table "wadokus", :force => true do |t|
     t.string   "entry"
     t.text     "contents"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.text     "translation"
+    t.string   "writing"
+    t.string   "reading"
   end
 
 end

@@ -26,10 +26,6 @@
     <%= f.text_field :reading %>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-
 <% end %>
 
 <p><%= link_to 'Zurück zur Liste der Kimura-Einträge', kimuras_path %></p>

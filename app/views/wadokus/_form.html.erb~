@@ -11,30 +11,14 @@
     </div>
   <% end %>
 
-
   <div class="field">
-    <%= f.label "Wadoku-ID" %><br />
+    <%= f.label :entry %><br />
     <%= f.text_field :entry %>
   </div>
   <div class="field">
-    <%= f.label "Offizielle Definition" %><br />
-    <%= f.text_field :contents %>
+    <%= f.label :contents %><br />
+    <%= f.text_area :contents %>
   </div>
-  <div class="field">
-    <%= f.label "Bedeutung (Deutsch)" %><br />
-    <%= f.text_field :translation %>
-  </div>
-  <div class="field">
-    <%= f.label "Schreibung (Japanisch)" %><br />
-    <%= f.text_area :writing %>
-  </div>
-  <div class="field">
-    <%= f.label "Lesung (Romaji)" %><br />
-    <%= f.text_field :reading %>
-  </div>
-
-
-
   <div class="actions">
     <%= f.submit %>
   </div>

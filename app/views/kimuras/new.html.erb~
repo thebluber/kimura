@@ -33,11 +33,6 @@
     <%= f.label "Schreibung: " %><br />
     <%= f.text_field :kimura_writing %>
   </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-
 <% end %>
 
 <p><%= link_to 'Zurück zur Listenansicht', kimuras_path %></p>
