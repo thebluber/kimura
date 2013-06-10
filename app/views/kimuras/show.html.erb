@@ -31,6 +31,48 @@
     <%= link_to @kimura.wadoku.entry, edit_wadoku_path(@kimura.wadoku) %>
   </p>
 <% end %>
+<ul class="unstyled">
+  <% @kimura.comments.order("updated_at DESC").each do |comment| %>
+    <li>
+    <div name="comment">
+      <strong><%= comment.user.email %></strong>
+      <br />
+      <%= comment.body %>
+      <br />
+      <%= comment.updated_at.to_s %>
+    </div>
+    <% if comment.user == current_user %>
+      <div class="action">
+        <%= link_to "Delete", comment_path(comment), method: :delete %>
+      </div>
+    <% end %>
+    <hr>
+    </li>
+  <% end%>
+</ul>
+
+<%= form_for(Comment.new, :method => :post) do |f| %>                                                              
+  <fieldset>
+    <% if @comment.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+        <ul>
+          <% @comment.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= f.hidden_field :kimura_id, :value => @kimura.id  %>
+    <%= f.hidden_field :user_id, :value => current_user.id  %>
+    <%= f.label "Kommentar" %><br />
+    <%= f.text_area :body, :class => "comment_field" %>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  </fieldset>
+<% end%>
 
 
 <%= link_to 'Edit', edit_kimura_path(@kimura) %> |

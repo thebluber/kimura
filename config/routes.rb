@@ -6,6 +6,7 @@ Baseviewer::Application.routes.draw do
 
 
   resources :kimuras
+  resources :comments
 
 
   devise_for :users

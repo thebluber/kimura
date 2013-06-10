@@ -11,6 +11,7 @@ class KimurasController < ApplicationController
   # GET /kimuras/1.json
   def show
     @kimura = Kimura.find(params[:id])
+    @comment = Comment.new
   end
 
   # GET /kimuras/new
