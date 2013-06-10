@@ -7,8 +7,29 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="container">
-    <div class="row">
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <%= link_to "Kimura <3 Wadoku", root_path, :class => 'brand' %>
+        <ul class="nav">
+          <li><%= link_to "Konto", edit_user_registration_path(current_user), :method => :get %></li>
+          <li class="dropdown">
+          <a class='dropdown-toggle' data-toggle='dropdown' href='#'>Kimura Entries</a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+            <li><%= link_to "All entries", kimuras_path, :method => :get %></li>
+            <li><%= link_to "My entries", users_my_kimura_path(current_user), :method => :get %></li>
+          </ul>
+          </li>
+        </ul>
+
+        <ul class="nav pull-right">
+          <li><%= link_to "#{current_user.email} abmelden.", destroy_user_session_path, :method => :delete %></li>
+        </ul>
+      </div>
+    </div>
+  </div>..
+  <div class="container-fluid">
+    <div class="row-fluid">
       <% if notice %>
         <p class="notice"><%= notice %></p>
       <% end %>
@@ -22,14 +43,6 @@
       <%= yield %>
       </div>
 
-      <% if user_signed_in? %>
-        Logged in as <strong><%= current_user.email %></strong>.
-        <%= link_to 'Account verwalten', edit_user_registration_path %> |
-        <%= link_to "Sitzung beenden", destroy_user_session_path, :method => :delete %>
-      <% else %>
-        <%= link_to "Neues Account anlegen", new_user_registration_path %> |
-        <%= link_to "Einloggen", new_user_session_path  %>
-      <% end %>
     </div>
   </div>
 
