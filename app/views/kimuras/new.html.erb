@@ -1,5 +1,46 @@
 <h1>New kimura</h1>
+<%= form_for(@kimura) do |f| %>
+  <% if @kimura.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@kimura.errors.count, "error") %> prohibited this kimura from being saved:</h2>
 
-<%= render 'form' %>
+      <ul>
+        <% @kimura.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<%= link_to 'Back', kimuras_path %>
+  <div class="field">
+    <%= f.label "Seite: " %><br />
+    <%= f.text_field :kimura_page %>
+  </div>
+  <div class="field">
+    <%= f.label "Spalte: " %><br />
+    <%= f.text_field :kimura_column %>
+  </div>
+  <div class="field">
+    <%= f.label "Lemma: " %><br />
+    <%= f.text_field :kimura_lemma %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Lesung: " %><br />
+    <%= f.text_field :kimura_reading %>
+  </div>
+  <div class="field">
+    <%= f.label "Schreibung: " %><br />
+    <%= f.text_field :kimura_writing %>
+  </div>
+
+
+  <p>Wählen Sie bitte die passende ID aus der obigen Liste aus: <%= select_tag "wadoku_id", options_for_select(@ids + ['new'], @selected_id) %> </p>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>
+
+<%= link_to 'Back', users_my_kimura_path(current_user) %>

@@ -18,6 +18,8 @@ class KimurasController < ApplicationController
   # GET /kimuras/new.json
   def new
     @kimura = Kimura.new
+    @ids = []
+    @selected_id = ""
   end
 
   # GET /kimuras/1/edit
@@ -38,6 +40,7 @@ class KimurasController < ApplicationController
   # POST /kimuras.json
   def create
     @kimura = Kimura.new(params[:kimura])
+    @kimura.user = current_user
     if @kimura.save
       redirect_to @kimura, :notice => 'Sie haben einen neuen Eintrag erstellt!'
     else
