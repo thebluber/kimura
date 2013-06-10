@@ -3,28 +3,47 @@
 <%= paginate @kimuras %>
 
 <table class="table-striped">
-  <tr>
-    <th>Seite</th>
-    <th>Spalte</th>
-    <th>Lemma</th>
-    <th>Lesung</th>
-    <th>Bearbeitet</th>
-    <th>Kandidaten vorhanden</th>
-    <th></th>
-    <th></th>
-  </tr>
+  <thead>
+    <tr>
+      <th>Seite</th>
+      <th>Spalte</th>
+      <th>Lemma</th>
+      <th>Lesung</th>
+      <th>Schreibung</th>
+      <th>Bearbeitet</th>
+      <th>Kommentar</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
 
-<% @kimuras.each do |kimura| %>
-  <tr>
-    <td><%= kimura.kimura_page %></td>
-    <td><%= kimura.kimura_column %></td>
-    <td><%= kimura.kimura_lemma %></td>
-    <td><%= kimura.kimura_reading %></td>
-    <td><font color="#0000FF"><%= kimura.kimura_isEdited %></font></td>
-    <td><%= kimura.kimura_hasCandidates %></td>
-    <td><%= link_to 'Show', kimura %></td>
-    <td><%= link_to 'Edit', edit_kimura_path(kimura) %></td>
-  </tr>
-<% end %>
+  <tbody>
+    <% @kimuras.each do |kimura| %>
+      <tr>
+        <td><%= kimura.kimura_page %></td>
+        <td><%= kimura.kimura_column %></td>
+        <td><%= kimura.kimura_lemma %></td>
+        <td><%= kimura.kimura_reading %></td>
+        <td><%= kimura.kimura_writing %></td>
+        <td>
+          <% if kimura.kimura_isEdited %>
+            <span class="label label-success">✓</span> 
+          <% end %>
+        </td>
+        <td>
+          <% if kimura.comments.length > 0 %>
+            <span class="badge badge-important"><%= kimura.comments.length %></span> 
+          <% end %>
+        </td>
+        <td><%= link_to 'Show', kimura %></td>
+        <td>
+          <% if kimura.user == current_user %>
+            <%= link_to 'Edit', edit_kimura_path(kimura) %>
+          <% end %>
+        </td>
+
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
