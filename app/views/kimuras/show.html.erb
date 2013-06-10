@@ -28,7 +28,7 @@
 <% if @kimura.wadoku %>
   <p>
     <b>Kimura parsed wadoku:</b>
-    <%= link_to @kimura.wadoku.entry, wadoku_path(@kimura.wadoku) %>
+    <%= link_to @kimura.wadoku.entry, edit_wadoku_path(@kimura.wadoku) %>
   </p>
 <% end %>
 
