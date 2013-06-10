@@ -13,6 +13,8 @@ Baseviewer::Application.routes.draw do
    get "home/index"
    root :to => 'home#index'
 
+  match 'users/:id/my_kimuras' => 'users#my_kimuras', :as => :users_my_kimura, :via => :get
+
   # match 'user/eat_chocolate/:id' => 'user#eat_chocolate', :as => :eat_chocolate_user
 
   # The priority is based upon order of creation:
