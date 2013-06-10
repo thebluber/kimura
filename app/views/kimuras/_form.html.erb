@@ -21,6 +21,18 @@
   <% else %>
     <p> Dieser Eintrag wurde noch nicht bearbeitet</p>
   <% end %>
+  <div class="field">
+    <%= f.label "Seite: " %><br />
+    <%= f.text_field :kimura_page %>
+  </div>
+  <div class="field">
+    <%= f.label "Spalte: " %><br />
+    <%= f.text_field :kimura_column %>
+  </div>
+  <div class="field">
+    <%= f.label "Lemma: " %><br />
+    <%= f.text_field :kimura_lemma %>
+  </div>
 
   <div class="field">
     <%= f.label "Lesung: " %><br />
