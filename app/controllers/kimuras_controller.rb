@@ -22,10 +22,15 @@ class KimurasController < ApplicationController
   # GET /kimuras/1/edit
   def edit
     @kimura = Kimura.find(params[:id])
-    @selected_id = @kimura.wadoku ? @kimura.wadoku.entry : ""
-    @ids = @kimura.kimura_wadoku_candidates ? @kimura.kimura_wadoku_candidates.split(",").map(&:strip) : []
-    @entries = Wadoku.find_all_by_entry(@ids)
-    @entries << @kimura.wadoku if @kimura.wadoku.present?
+    if current_user == @kimura.user
+      @selected_id = @kimura.wadoku ? @kimura.wadoku.entry : ""
+      @ids = @kimura.kimura_wadoku_candidates ? @kimura.kimura_wadoku_candidates.split(",").map(&:strip) : []
+      @entries = Wadoku.find_all_by_entry(@ids)
+      @entries << @kimura.wadoku if @kimura.wadoku.present?
+    else
+      redirect_to kimuras_path
+    end
+
   end
 
   # POST /kimuras

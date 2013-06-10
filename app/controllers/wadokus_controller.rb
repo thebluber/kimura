@@ -1,35 +1,22 @@
 class WadokusController < ApplicationController
   # GET /wadokus
   # GET /wadokus.json
+  before_filter :signed_in?
   def index
     @wadokus = Wadoku.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @wadokus }
-    end
+    redirect_to root_path
   end
 
   # GET /wadokus/1
   # GET /wadokus/1.json
   def show
     @wadoku = Wadoku.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render :json => @wadoku }
-    end
   end
 
   # GET /wadokus/new
   # GET /wadokus/new.json
   def new
     @wadoku = Wadoku.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render :json => @wadoku }
-    end
   end
 
   # GET /wadokus/1/edit
@@ -45,10 +32,8 @@ class WadokusController < ApplicationController
     respond_to do |format|
       if @wadoku.save
         format.html { redirect_to @wadoku, :notice => 'Wadoku was successfully created.' }
-        format.json { render :json => @wadoku, :status => :created, :location => @wadoku }
       else
         format.html { render :action => "new" }
-        format.json { render :json => @wadoku.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -61,10 +46,8 @@ class WadokusController < ApplicationController
     respond_to do |format|
       if @wadoku.update_attributes(params[:wadoku])
         format.html { redirect_to @wadoku, :notice => 'Wadoku was successfully updated.' }
-        format.json { head :no_content }
       else
         format.html { render :action => "edit" }
-        format.json { render :json => @wadoku.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -79,5 +62,10 @@ class WadokusController < ApplicationController
       format.html { redirect_to wadokus_url }
       format.json { head :no_content }
     end
+  end
+  private
+
+  def signed_in?
+    redirect_to root_path unless user_signed_in?
   end
 end
