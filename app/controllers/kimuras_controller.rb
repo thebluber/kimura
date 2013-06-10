@@ -23,7 +23,7 @@ class KimurasController < ApplicationController
   def edit
     @kimura = Kimura.find(params[:id])
     @selected_id = @kimura.wadoku ? @kimura.wadoku.entry : ""
-    @ids = @kimura.kimura_wadoku_candidates.split(",").map(&:strip)
+    @ids = @kimura.kimura_wadoku_candidates ? @kimura.kimura_wadoku_candidates.split(",").map(&:strip) : []
     @entries = Wadoku.find_all_by_entry(@ids)
     @entries << @kimura.wadoku if @kimura.wadoku.present?
   end
