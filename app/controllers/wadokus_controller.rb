@@ -1,7 +1,7 @@
 class WadokusController < ApplicationController
   # GET /wadokus
   # GET /wadokus.json
-  before_filter :signed_in?
+  before_filter :authenticate_user!
   def index
     @wadokus = Wadoku.all
     redirect_to root_path
@@ -63,9 +63,5 @@ class WadokusController < ApplicationController
       format.json { head :no_content }
     end
   end
-  private
 
-  def signed_in?
-    redirect_to root_path unless user_signed_in?
-  end
 end
